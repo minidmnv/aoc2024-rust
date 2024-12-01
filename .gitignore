@@ -1,0 +1,11 @@
+# Intellij Idea
+.idea
+aoc.iml
+
+
+# Rust
+Cargo.lock
+target/
+
+# AoC requirements
+data/*
