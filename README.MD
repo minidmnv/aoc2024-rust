@@ -1,6 +1,6 @@
 # Rust-template
 
-![Build Status](https://github.com/minidmnv/aoc2024-rust/workflows/main/badge.svg)
+![Build Status](https://github.com/minidmnv/aoc2024-rust/actions/workflows/build.yml/badge.svg)
 
 A project template for Rust, helping to structure your projects according to best practices.
 
