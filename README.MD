@@ -1,8 +1,8 @@
-# Rust-template
+# Aoc 2024 - Rust
 
 ![Build Status](https://github.com/minidmnv/aoc2024-rust/actions/workflows/build.yml/badge.svg)
 
-A project template for Rust, helping to structure your projects according to best practices.
+Solutions for AoC 2024 written in Rust and organized in a simple/single project
 
 ## Features
 
