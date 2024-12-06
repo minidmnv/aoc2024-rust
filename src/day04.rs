@@ -1,11 +1,8 @@
 use std::os::unix::raw::uid_t;
+use crate::utils::parse_to_grid;
 
 pub fn run(input: &str) {
-
-    let grid: Vec<Vec<char>> = input
-        .lines()
-        .map(|line| line.chars().collect())
-        .collect();
+    let grid = parse_to_grid(input);
 
     part_one(grid.clone());
     part_two(grid.clone());

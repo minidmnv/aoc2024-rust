@@ -1,3 +1,6 @@
+use std::ops::{Index, RangeBounds};
+use std::option::IterMut;
+
 pub fn get_middle_number(numbers: &Vec<i32>) -> Option<i32> {
     if numbers.is_empty() {
         return None; // Return None if the Vec is empty
@@ -24,3 +27,32 @@ pub fn find_element<T, I>(collection: I, target: T) -> Option<T>
 {
     collection.into_iter().find(|&item| item == target)
 }
+
+pub fn parse_to_grid(input: &str) -> Vec<Vec<char>> {
+    let grid: Vec<Vec<char>> = input
+        .lines()
+        .map(|line| line.chars().collect())
+        .collect();
+    grid
+}
+
+pub fn get_element_from_grid(collection: &Vec<Vec<char>>, coords: (usize, usize)) -> char
+{
+    collection[coords.0][coords.1]
+}
+
+pub fn count_char_in_grid(grid: &Vec<Vec<char>>, target: char) -> usize {
+    grid.iter()
+        .flat_map(|row| row.iter())
+        .filter(|&&c| c == target)
+        .count()
+}
+
+pub fn print_grid_with_delimiters(grid: &Vec<Vec<char>>) {
+    for row in grid {
+        println!("|{}|", row.iter().map(|&c| c.to_string()).collect::<Vec<_>>().join("|"));
+    }
+
+    println!("{}", "-".repeat(grid[0].len()));
+}
+
