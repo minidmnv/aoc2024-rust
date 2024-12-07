@@ -1,3 +1,5 @@
+use std::fmt::format;
+
 #[derive(Debug, Clone)]
 struct Equation {
     result: i64,
@@ -18,13 +20,14 @@ impl Equation {
             match operation {
                 '+' => result += operand,
                 '*' => result *= operand,
+                '|' => result = format!("{}{}", result, operand).parse::<i64>().expect("Failed to parse concatenated numbers"),
                 _ => ()
             }
         }
-        println!("Result: {}, {}, {} ", result, &self.result, result.eq(&self.result));
         result.eq(&self.result)
     }
 }
+
 pub fn run(input: &str) {
     let equations = input.lines().map(|line| {
         let mut parts = line.split(":");
@@ -34,27 +37,43 @@ pub fn run(input: &str) {
     }).collect();
 
 
-    part_one(equations);
-    // part_two(&mut grid.clone());
+    part_one(&equations);
+    part_two(&equations);
 }
 
-fn part_one(equations: Vec<Equation>) {
+fn part_one(equations: &Vec<Equation>) {
     let possible_operations = vec!['+', '*'];
 
-    let result = equations.iter().filter(|equation| {
+    let result = calculate_calibration_result(equations, possible_operations);
+
+    println!("Day 7, part 1 result: {}", result);
+}
+
+fn part_two(equations: &Vec<Equation>) {
+    let possible_operations = vec!['+', '*', '|'];
+
+    let result = calculate_calibration_result(equations, possible_operations);
+
+    println!("Day 7, part 2 result: {}", result);
+}
+
+fn calculate_calibration_result(equations: &Vec<Equation>, possible_operations: Vec<char>) -> i64 {
+    let result: i64 = equations.iter().filter(|equation| {
         let mut is_valid = false;
         let operation_count = equation.operands.len() - 1;
         let operation_permutations = generate_combinations(possible_operations.clone(), operation_count);
 
         for operation_sequence in operation_permutations {
-            if equation.is_valid(operation_sequence) { is_valid = true; break; }
+            if equation.is_valid(operation_sequence) {
+                is_valid = true;
+                break;
+            }
         }
 
-        println!("Returning: {}", is_valid);
         is_valid
-    }).count();
+    }).map(|equation| equation.result).sum();
 
-    println!("Day 7, part 1 result: {}", result);
+    result
 }
 
 fn generate_combinations(operations: Vec<char>, n: usize) -> Vec<Vec<char>> {
