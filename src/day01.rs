@@ -1,8 +1,11 @@
+use measure_time_macro::measure_time;
+
 pub fn run(input: &str) {
     part_one(input);
     part_two(input);
 }
 
+#[measure_time]
 fn part_one(input: &str) {
     let (mut column1, mut column2) = prepare_numbers_columns(input);
 
@@ -18,6 +21,7 @@ fn part_one(input: &str) {
     println!("Day 1, part 1 result: {}", sum_of_differences);
 }
 
+#[measure_time]
 fn part_two(input: &str) {
     let (column1, column2) = prepare_numbers_columns(input);
     let sum_of_weights: i32 = column1.iter().map(|&number| number * (column2.iter().filter(|&&x| x == number).count() as i32)).sum();

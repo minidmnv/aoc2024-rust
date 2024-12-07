@@ -1,4 +1,4 @@
-use std::fmt::format;
+use measure_time_macro::measure_time;
 
 #[derive(Debug, Clone)]
 struct Equation {
@@ -41,6 +41,7 @@ pub fn run(input: &str) {
     part_two(&equations);
 }
 
+#[measure_time]
 fn part_one(equations: &Vec<Equation>) {
     let possible_operations = vec!['+', '*'];
 
@@ -49,6 +50,7 @@ fn part_one(equations: &Vec<Equation>) {
     println!("Day 7, part 1 result: {}", result);
 }
 
+#[measure_time]
 fn part_two(equations: &Vec<Equation>) {
     let possible_operations = vec!['+', '*', '|'];
 

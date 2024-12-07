@@ -1,3 +1,5 @@
+use measure_time_macro::measure_time;
+
 pub fn run(input: &str) {
     let reports: Vec<Vec<i32>> = input.lines().map(|line| {
         line.split_whitespace().filter_map(|num: &str| num.parse::<i32>().ok()).collect()
@@ -7,6 +9,7 @@ pub fn run(input: &str) {
     part_two(&reports);
 }
 
+#[measure_time]
 fn part_one(reports: &Vec<Vec<i32>>) {
     let mut safe_reports = reports.len();
 
@@ -19,6 +22,7 @@ fn part_one(reports: &Vec<Vec<i32>>) {
     println!("Day 2, part 1 result: {}", safe_reports);
 }
 
+#[measure_time]
 fn part_two(reports: &Vec<Vec<i32>>) {
     let mut safe_reports = reports.len();
 

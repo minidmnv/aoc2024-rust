@@ -1,5 +1,3 @@
-use std::ops::{Index, RangeBounds};
-use std::option::IterMut;
 
 pub fn get_middle_number(numbers: &Vec<i32>) -> Option<i32> {
     if numbers.is_empty() {

@@ -1,5 +1,6 @@
 use std::collections::HashSet;
-use crate::utils::{count_char_in_grid, get_element_from_grid, parse_to_grid, print_grid_with_delimiters};
+use measure_time_macro::measure_time;
+use crate::utils::{count_char_in_grid, get_element_from_grid, parse_to_grid};
 
 const DIRECTIONS: [char; 4] = ['^', '>', 'v', '<'];
 const DIRECTION_MAP: &[(char, (i32, i32))] = &[
@@ -21,14 +22,15 @@ fn get_direction(c: char) -> Option<(i32, i32)> {
 
 pub fn run(input: &str) {
 
-    let mut grid = parse_to_grid(input);
+    let grid = parse_to_grid(input);
 
     part_one(&mut grid.clone());
     part_two(&mut grid.clone());
 }
 
+#[measure_time]
 fn part_one(mut grid: &mut Vec<Vec<char>>) {
-    let mut is_guard_on_map = true;
+    let is_guard_on_map = true;
     let (mut direction, mut guard_current_position, mut guard_current_direction) = find_guard_position_with_direction(grid).unwrap();
     let mut current_direction_index = DIRECTIONS.iter().position(|&d| d == direction).unwrap();
 
@@ -47,7 +49,7 @@ fn part_one(mut grid: &mut Vec<Vec<char>>) {
     println!("Day 6, part 1 result: {}", count_char_in_grid(grid, 'X'));
 }
 
-fn move_guard(mut grid: &mut Vec<Vec<char>>, mut direction: &mut char, mut guard_current_position: &mut (usize, usize), mut guard_current_direction: &mut (i32, i32), mut current_direction_index: &mut usize) -> bool {
+fn move_guard(grid: &mut Vec<Vec<char>>, direction: &mut char, guard_current_position: &mut (usize, usize), guard_current_direction: &mut (i32, i32), current_direction_index: &mut usize) -> bool {
     let new_position = move_position_in_direction(guard_current_position, guard_current_direction);
     if new_position.is_none() || new_position.unwrap().1 >= grid.len() || new_position.unwrap().0 >= grid[0].len() {
         grid[guard_current_position.0][guard_current_position.1] = 'X';
@@ -66,6 +68,7 @@ fn move_guard(mut grid: &mut Vec<Vec<char>>, mut direction: &mut char, mut guard
     false
 }
 
+#[measure_time]
 fn part_two(mut grid: &mut Vec<Vec<char>>) {
     let clean_grid = grid.clone();
 

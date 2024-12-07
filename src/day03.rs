@@ -1,10 +1,12 @@
 use regex::{Regex};
+use measure_time_macro::measure_time;
 
 pub fn run(input: &str) {
     part_one(&input);
     part_two(&input);
 }
 
+#[measure_time]
 fn part_one(input: &&str) {
     let re = Regex::new(r"mul\((\d+),\s*(\d+)\)").unwrap();
 
@@ -20,6 +22,7 @@ fn part_one(input: &&str) {
     println!("Day 3, part 1 result: {}", result);
 }
 
+#[measure_time]
 fn part_two(input: &&str) {
     const DO_INSTRUCTION: &str = "do()";
     const DONT_INSTRUCTION: &str = "don't()";

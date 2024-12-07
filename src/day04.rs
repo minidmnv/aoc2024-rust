@@ -1,4 +1,4 @@
-use std::os::unix::raw::uid_t;
+use measure_time_macro::measure_time;
 use crate::utils::parse_to_grid;
 
 pub fn run(input: &str) {
@@ -8,6 +8,7 @@ pub fn run(input: &str) {
     part_two(grid.clone());
 }
 
+#[measure_time]
 fn part_one(grid: Vec<Vec<char>>) {
     const XMAS: &str = "XMAS";
 
@@ -73,6 +74,7 @@ fn match_x_mas_in_grid(grid: Vec<Vec<char>>, x: usize, y: usize) -> i32 {
     if result_array[0] == result_array[1] || result_array[2] == result_array[3] || result_array.iter().filter(|&&cr| cr == 'M').count() != 2 || result_array.iter().filter(|&&cr| cr == 'S').count() != 2 { 0 } else { 1 }
 }
 
+#[measure_time]
 fn part_two(grid: Vec<Vec<char>>) {
 
     let result: i32 = grid.iter().enumerate().map(|(x, row)| row.iter().enumerate().map(|(y, _value)| match_x_mas_in_grid(grid.clone(), x, y)).sum::<i32>()).sum::<i32>();
