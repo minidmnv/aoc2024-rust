@@ -29,7 +29,7 @@ fn part_one(instruction_order: Vec<Vec<i32>>, instructions: Vec<Vec<i32>>) {
 
             let elements_after_order = elements_map.get(&instruction).unwrap();
 
-            let (elements_before, elements_after) = split_around_pivot(instructions[k].clone(), index);
+            let (elements_before, _elements_after) = split_around_pivot(instructions[k].clone(), index);
 
             if elements_before.iter().any(|elem| find_element(elements_after_order, elem).is_some()) {
                 instruction_result = false;
@@ -63,7 +63,7 @@ fn part_two(instruction_order: Vec<Vec<i32>>, instructions: Vec<Vec<i32>>) {
         for (index, &instruction) in instructions[k].iter().enumerate() {
             let elements_after_order = elements_map.get(&instruction).unwrap();
 
-            let (elements_before, elements_after) = split_around_pivot(instructions[k].clone(), index);
+            let (elements_before, _elements_after) = split_around_pivot(instructions[k].clone(), index);
 
             if elements_before.iter().any(|elem| find_element(elements_after_order, elem).is_some()) {
                 let correct_list = sort_pages(&instructions[k], &elements_map);
@@ -90,7 +90,7 @@ fn sort_pages(page_list: &[i32], page_order: &HashMap<i32, Vec<i32>>) -> Vec<i32
             }
         };
 
-        if let Some((index_before, element_before)) = sorted_list[..index]
+        if let Some((index_before, _element_before)) = sorted_list[..index]
             .iter()
             .enumerate()
             .find(|(_, element)| after_elements.contains(element))

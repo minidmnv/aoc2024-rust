@@ -1,4 +1,3 @@
-use std::fmt::format;
 
 #[derive(Debug, Clone)]
 struct Equation {
