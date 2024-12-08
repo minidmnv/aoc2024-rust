@@ -1,5 +1,4 @@
 use std::collections::{HashMap, HashSet};
-use std::hash::Hash;
 use measure_time_macro::measure_time;
 
 #[derive(Debug, Clone)]
@@ -120,10 +119,6 @@ impl Grid {
             } else {
                 current.1
             };
-        }
-
-        if a2.0 < self.matrix[0].len() && a2.1 < self.matrix.len() {
-            result.push(a2);
         }
 
         result
