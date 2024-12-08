@@ -1,6 +1,5 @@
 use std::collections::{HashMap, HashSet};
 use std::hash::Hash;
-use std::iter::Map;
 use measure_time_macro::measure_time;
 
 #[derive(Debug, Clone)]
@@ -85,24 +84,46 @@ impl Grid {
         let step_y = if a2.1 > a1.1 { a2.1 - a1.1 } else { a1.1 - a2.1 };
 
         let mut current = a1;
-        let mut previous = a2;
 
-        while current.0 < self.matrix[0].len()
-            && current.1 < self.matrix.len()
-        {
-            result.push(current);
+        loop {
 
-            if a2.0 > a1.0 {
-                current.0 = current.0.checked_sub(step_x).unwrap_or_else(|| break);
+            if current.0 < self.matrix[0].len() && current.1 < self.matrix.len() {
+                result.push(current);
+            } else {
+                break;
+            }
+
+            current.0 = if a2.0 > a1.0 {
+                match current.0.checked_sub(step_x) {
+                    Some(val) => val,
+                    None => break,
+                }
             } else if a2.0 < a1.0 {
-                current.0 = current.0.saturating_add(step_x);
-            }
+                match current.0.checked_add(step_x) {
+                    Some(val) => val,
+                    None => break,
+                }
+            } else {
+                current.0
+            };
 
-            if a2.1 > a1.1 {
-                current.1 = current.1.saturating_sub(step_y);
+            current.1 = if a2.1 > a1.1 {
+                match current.1.checked_sub(step_y) {
+                    Some(val) => val,
+                    None => break,
+                }
             } else if a2.1 < a1.1 {
-                current.1 = current.1.saturating_add(step_y);
-            }
+                match current.1.checked_add(step_y) {
+                    Some(val) => val,
+                    None => break,
+                }
+            } else {
+                current.1
+            };
+        }
+
+        if a2.0 < self.matrix[0].len() && a2.1 < self.matrix.len() {
+            result.push(a2);
         }
 
         result
