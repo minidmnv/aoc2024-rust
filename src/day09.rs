@@ -62,7 +62,6 @@ fn part_two(memory: Vec<Option<i64>>) {
             break;
         }
 
-        println!("FileId {}", current_file_id);
         let file_size = result_array.iter().filter(|memory| memory.is_some()).filter(|memory| memory.unwrap() == current_file_id).count();
         let file_index = result_array.iter().position(|memory| memory.unwrap_or_else(||-1) == current_file_id).unwrap();
 
