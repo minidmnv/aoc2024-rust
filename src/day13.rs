@@ -13,7 +13,12 @@ impl Machine {
         let a = ((self.prize.0 - self.prize.1 * self.b_button.0 / self.b_button.1) / (self.a_button.0 - self.a_button.1 * self.b_button.0 / self.b_button.1)).round();
         let b = ((self.prize.1 - a * self.a_button.1) / self.b_button.1).round();
 
-        if a * self.a_button.0 + b * self.b_button.0 == self.prize.0 && a * self.a_button.1 + b * self.b_button.1 == self.prize.1 && a >= 0f64 && b >= 0f64 { Some( a * 3f64 + b) } else { None };
+        return if a * self.a_button.0 + b * self.b_button.0 == self.prize.0 &&
+            a * self.a_button.1 + b * self.b_button.1 == self.prize.1 &&
+            a >= 0f64 && b >= 0f64
+        { Some( a * 3f64 + b) }
+        else
+        { None };
     }
 }
 
