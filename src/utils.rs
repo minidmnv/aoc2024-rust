@@ -54,3 +54,13 @@ pub fn print_grid_with_delimiters(grid: &Vec<Vec<char>>) {
     println!("{}", "-".repeat(grid[0].len()));
 }
 
+pub fn find_coordinates(grid: Vec<Vec<char>>, target: char) -> Option<(usize, usize)> {
+    for (row_idx, row) in grid.iter().enumerate() {
+        for (col_idx, &cell) in row.iter().enumerate() {
+            if cell == target {
+                return Some((col_idx, row_idx));
+            }
+        }
+    }
+    None
+}
