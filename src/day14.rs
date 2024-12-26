@@ -118,62 +118,6 @@ fn part_two(input: &str, width: i32, height: i32) -> i32 {
         result += 1;
     }
 
-    //
-    //
-    // let quadrants: [(std::ops::Range<i32>, std::ops::Range<i32>); 4] = [
-    //     (0..width / 2, 0..height / 2),       // Quadrant 1
-    //     (width / 2 + 1..width + 1, 0..height / 2),     // Quadrant 2
-    //     (0..width / 2, height / 2 + 1..height + 1),     // Quadrant 3
-    //     (width / 2 + 1..width + 1, height / 2 + 1..height + 1),   // Quadrant 4
-    // ];
-    //
-    // let robots = parse(input);
-    // let mut result = 0;
-    // let mut current_factor = i32::MAX;
-    //
-    // for i in 0..i32::MAX {
-    //
-    //     let mut quadrant_counts: HashMap<i32, i32> = HashMap::new();
-    //
-    //     robots.iter().map(|robot| robot.predict_future(i, width, height)).for_each(|future_robot| {
-    //         let position = future_robot.position;
-    //         if let Some(quadrant) = quadrants.iter().position(|(x_range, y_range)| {
-    //             x_range.contains(&position.0) && y_range.contains(&position.1)
-    //         }) {
-    //             *quadrant_counts.entry((quadrant + 1) as i32).or_insert(0) += 1;
-    //         }
-    //     });
-    //
-    //     for i in 1..=4 {
-    //         quadrant_counts.entry(i).or_insert(0);
-    //     }
-    //
-    //     let factor = quadrant_counts.values().sum();
-    //     println!("Trying {} seconds with {}", i, factor);
-    //
-    //     let mut grid: HashMap<(i32, i32), i32> = HashMap::new();
-    //     for robot in &robots {
-    //         let position = robot.predict_future(i, width, height).position;
-    //         *grid.entry(position).or_insert(0) += 1;
-    //     }
-    //
-    //     for y in 0..=height {
-    //         for x in 0..=width {
-    //             if let Some(count) = grid.get(&(x, y)) {
-    //                 print!("{}", count);
-    //             } else {
-    //                 print!(".");
-    //             }
-    //         }
-    //         println!();
-    //     }
-    //
-    //     if factor < current_factor {
-    //         result = i;
-    //         current_factor = factor;
-    //     }
-    // }
-
     println!("Day 14, part 2 result: {:?}", result);
 
     result

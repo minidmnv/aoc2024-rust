@@ -1,4 +1,5 @@
 use std::error::Error;
+use measure_time_macro::measure_time;
 
 type Warehouse = Vec<Vec<Tile>>;
 
@@ -22,12 +23,11 @@ enum Move {
 }
 
 use Move::*;
-use crate::utils::print_grid_with_delimiters;
 
 fn get_input(input: &str) -> (Warehouse, (usize, usize), Vec<Move>) {
     let mut robot_pos = (0, 0);
 
-    let mut parts = input.trim().split("\r\n\r\n");
+    let mut parts = input.trim().split("\n\n");
     let raw_warehouse = parts.next().unwrap();
     let raw_movements = parts.next().unwrap();
 
@@ -119,6 +119,7 @@ fn display(warehouse: &Warehouse, robot: (usize, usize)) {
     }
 }
 
+#[measure_time]
 pub fn part_one(input: &str) -> Result<(), Box<dyn Error + 'static>> {
     let (mut warehouse, mut position, movements) = get_input(input);
 
@@ -262,7 +263,8 @@ pub fn run(input: &str) {
     part_two(input);
 }
 
-pub fn part_two(input: &str) -> Result<(), Box<dyn Error + 'static>> {
+#[measure_time]
+fn part_two(input: &str) -> Result<(), Box<dyn Error + 'static>> {
     let (warehouse, mut position, movements) = get_input(input);
     let mut larger_warehouse = enlarge_warehouse(warehouse);
     position.1 *= 2;

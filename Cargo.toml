@@ -6,3 +6,4 @@ edition = "2021"
 [dependencies]
 measure_time_macro = { path = "./measure_time_macro" }
 regex = { version = "1.11.1", features = [] }
+itertools = "0.13.0"

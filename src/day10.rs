@@ -41,12 +41,9 @@ impl Graph {
     }
 
     pub fn get_possible_trailheads(&self, start_id: i32) -> HashSet<i32> {
-        let mut queue = VecDeque::new();
+        let mut queue: VecDeque<Node> = VecDeque::new();
         let mut peaks: HashSet<i32> = HashSet::new();
 
-        if let Some(start_node) = self.nodes.get(&start_id) {
-            queue.push_back(start_node.clone());
-        }
 
         while let Some(current_node) = queue.pop_front() {
             if let Some(neighbors) = self.adj_list.get(&current_node.id) {
