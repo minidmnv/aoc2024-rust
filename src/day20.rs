@@ -5,10 +5,6 @@ use measure_time_macro::measure_time;
 pub fn run(input: &str) {
     part_one(input, 100, 2);
     part_two(input, 100, 20);
-    //535084 low
-    //539179 low
-    //855535 low
-    //976351 wrong
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
